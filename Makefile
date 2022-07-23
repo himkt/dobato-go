@@ -1,6 +1,6 @@
 
 
 all:
-	GOOS=linux  GOARCH=amd64 go build -o dobato-linux-amd64
-	GOOS=darwin GOARCH=amd64 go build -o dobato-darwin-amd64
-	GOOS=darwin GOARCH=arm64 go build -o dobato-darwin-arm64
+	GOOS=linux  GOARCH=amd64 go build -o bin/dobato-linux-amd64
+	GOOS=darwin GOARCH=amd64 go build -o bin/dobato-darwin-amd64
+	GOOS=darwin GOARCH=arm64 go build -o bin/dobato-darwin-arm64
