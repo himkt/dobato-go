@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 himkt <himkt@klis.tsukuba.ac.jp>
-
-*/
 package cmd
 
 import (
@@ -21,14 +17,13 @@ type Payload struct {
 	Content string `json:"content"`
 }
 
-// postCmd represents the post command
 var postCmd = &cobra.Command{
 	Use:   "post",
 	Short: "Post text to discord server",
-	Long:  `Post text to discord server using HTTP.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		home, _ := os.UserHomeDir()
 		configPath := path.Join(home, ".config/dobato/webhook")
+
 		if _, err := os.Stat(configPath); errors.Is(err, os.ErrNotExist) {
 			fmt.Println("No config available, run dobato setup first.")
 			return
@@ -77,15 +72,5 @@ var postCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(postCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// postCmd.PersistentFlags().String("foo", "", "A help for foo")
 	postCmd.PersistentFlags().String("text", "test", "Text")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// postCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
