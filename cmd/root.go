@@ -7,8 +7,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "dobato-go",
-	Short: "A CLI tool to post a message to discord server",
+	Use:     "dobato-go",
+	Short:   "A CLI tool to post a message to discord server",
+	Version: "0.1.0",
 }
 
 func Execute() {
