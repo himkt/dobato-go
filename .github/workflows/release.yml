@@ -16,9 +16,10 @@ jobs:
 
       - name: Build
         run: |
-          GOOS=linux  GOARCH=amd64 go build -o bin/dobato-linux-amd64.${{ github.ref }}
-          GOOS=darwin GOARCH=amd64 go build -o bin/dobato-darwin-amd64.${{ github.ref }}
-          GOOS=darwin GOARCH=arm64 go build -o bin/dobato-darwin-arm64.${{ github.ref }}
+          VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
+          GOOS=linux  GOARCH=amd64 go build -o bin/dobato-linux-amd64.$VERSION
+          GOOS=darwin GOARCH=amd64 go build -o bin/dobato-darwin-amd64.$VERSION
+          GOOS=darwin GOARCH=arm64 go build -o bin/dobato-darwin-arm64.$VERSION
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@2.1.1
