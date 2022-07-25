@@ -20,7 +20,10 @@ var setupCmd = &cobra.Command{
 			return
 		}
 
-		os.MkdirAll(path.Join(home, ".config/dobato"), os.ModePerm)
+		if err := os.MkdirAll(path.Join(home, ".config/dobato"), os.ModePerm); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			return
+		}
 
 		fmt.Print("Webhook URL: ")
 		reader := bufio.NewReader(os.Stdin)
