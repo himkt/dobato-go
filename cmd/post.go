@@ -32,6 +32,7 @@ var postCmd = &cobra.Command{
 		f, err := os.Open(configPath)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
+			return
 		}
 
 		defer f.Close()
