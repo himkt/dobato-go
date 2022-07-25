@@ -47,7 +47,7 @@ var postCmd = &cobra.Command{
 
 		text, err := cmd.Flags().GetString("text")
 		if err != nil {
-			fmt.Fprintln(os.Stderr)
+			fmt.Fprintln(os.Stderr, err)
 			return
 		}
 
