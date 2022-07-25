@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Release binary
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: make
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@2.1.1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: bin/dobato-*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
