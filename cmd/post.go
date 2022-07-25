@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -24,8 +23,9 @@ var postCmd = &cobra.Command{
 		home, _ := os.UserHomeDir()
 		configPath := path.Join(home, ".config/dobato/webhook")
 
-		if _, err := os.Stat(configPath); errors.Is(err, os.ErrNotExist) {
-			fmt.Println("No config available, run dobato setup first.")
+		_, err := os.Stat(configPath)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
 			return
 		}
 
