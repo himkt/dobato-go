@@ -14,22 +14,27 @@ var setupCmd = &cobra.Command{
 	Short: "Set up webhook URL",
 	Long:  "Set discord webhook URL from standard input.",
 	Run: func(cmd *cobra.Command, args []string) {
-		home, err := os.UserHomeDir()
+		homeDir, err := os.UserHomeDir()
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return
 		}
 
-		if err := os.MkdirAll(path.Join(home, ".config/dobato"), os.ModePerm); err != nil {
+		configDir := path.Join(homeDir, ".config/dobato")
+		if err := os.MkdirAll(configDir, os.ModePerm); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return
 		}
 
 		fmt.Print("Webhook URL: ")
 		reader := bufio.NewReader(os.Stdin)
-		webhookUrl, _ := reader.ReadString('\n')
+		webhookUrl, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			return
+		}
 
-		configPath := path.Join(home, ".config/dobato/webhook")
+		configPath := path.Join(homeDir, ".config/dobato/webhook")
 		f, err := os.Create(configPath)
 
 		if err != nil {
