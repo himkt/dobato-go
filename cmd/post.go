@@ -51,8 +51,9 @@ var postCmd = &cobra.Command{
 			return
 		}
 
-		payload := new(Payload)
-		payload.Content = text
+		payload := Payload{
+			Content: text,
+		}
 
 		json, err := json.Marshal(payload)
 		if err != nil {
