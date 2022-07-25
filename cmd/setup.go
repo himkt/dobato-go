@@ -31,6 +31,7 @@ var setupCmd = &cobra.Command{
 
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
+			return
 		}
 
 		f.WriteString(webhookUrl)
