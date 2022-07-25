@@ -15,7 +15,10 @@ jobs:
       - uses: actions/setup-go@v3
 
       - name: Build
-        run: make
+        run: |
+          GOOS=linux  GOARCH=amd64 go build -o bin/dobato-linux-amd64.${{ github.ref }}
+          GOOS=darwin GOARCH=amd64 go build -o bin/dobato-darwin-amd64.${{ github.ref }}
+          GOOS=darwin GOARCH=arm64 go build -o bin/dobato-darwin-arm64.${{ github.ref }}
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@2.1.1
